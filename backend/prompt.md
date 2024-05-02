@@ -1,7 +1,6 @@
 I will give your a User Query and some Resources. Based on "rule" and "example", generate "your output"
 # rule
 Summarize what Resources you found for the User Query, try your best to provide answer
-Only when you can not find anything related, output "Related resources are rare, please search elsewhere". Be conservative on this option.
 
 # example
 User Query: what is the pyramid

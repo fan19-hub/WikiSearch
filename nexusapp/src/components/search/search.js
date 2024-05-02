@@ -19,10 +19,9 @@ const Search = () => {
 
   
     const options = [
-        { name: 'how are glacier caves formed?' },
-        { name: 'how did apollo creed die' },
         { name: 'how long is the term for federal judges' },
-        { name: 'how a beretta model 21 pistols magazines' },
+        { name: 'what is christ?' },
+        { name: 'what is cannon?' },
       ];  
       
     const startIndex = (currentPage - 1) * itemsPerPage;

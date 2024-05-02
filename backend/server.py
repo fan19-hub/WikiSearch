@@ -71,6 +71,8 @@ def bot_summary():
     if nobot:
         return json.dumps({"bot_summary": "No OpenAI API key provided. Please provide a valid key"})
     try:
+        with open("prompt.md", "r") as f:
+            template = f.read()
         prompt=template.format(QUERY = query, SEARCH_RES = search_res)
         bot_summary = model.generate(prompt, max_length=200)
     except:
