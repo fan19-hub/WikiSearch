@@ -9,15 +9,23 @@ os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
 
 # Initialization
 print("Starting server...")
-print("Loading retriever...")
+print("Loading retriever...This usually takes 3-4 minutes.")
 myretriever = retriever()
 print("1/3 done")
 
 
 print("Loading chatbot...")
-model = GPT3()
-with open("prompt.md", "r") as f:
-    template = f.read()
+nobot = False
+try:
+    model = GPT3()
+    with open("prompt.md", "r") as f:
+        template = f.read()
+    
+except:
+    nobot=True
+    print("No OpenAI API key provided. Set no bot mode")
+
+
 print("2/3 done")
 
 
@@ -60,11 +68,13 @@ def bot_summary():
     
     # bot summary
     search_res = search_res[:1500]
-    prompt=template.format(QUERY = query, SEARCH_RES = search_res)
+    if nobot:
+        return json.dumps({"bot_summary": "No OpenAI API key provided. Please provide a valid key"})
     try:
+        prompt=template.format(QUERY = query, SEARCH_RES = search_res)
         bot_summary = model.generate(prompt, max_length=200)
     except:
-        return json.dumps({"bot_summary": "No OpenAI API key provided. Please provide a valid key"})
+        return json.dumps({"bot_summary": "Error in generating summary. Please check if the software is complete and the network is working."})
 
     res= {      
         "bot_summary": bot_summary
